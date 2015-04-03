@@ -1,3 +1,3 @@
-module DinoUpsert
+module DinoUtils
   VERSION = "0.1.1"
 end

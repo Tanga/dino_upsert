@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'dino_upsert/version'
+require 'dino_utils/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "dino_upsert"
-  spec.version       = DinoUpsert::VERSION
+  spec.name          = "dino_utils"
+  spec.version       = DinoUtils::VERSION
   spec.authors       = ["Joe Van Dyk"]
   spec.email         = ["joe@tanga.com"]
 
-  spec.summary       = %q{Upsert stuff}
-  spec.homepage      = "https://github.com/tanga/dino_upsert"
+  spec.summary       = %q{Dino stuff}
+  spec.homepage      = "https://github.com/tanga/dino_utils"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

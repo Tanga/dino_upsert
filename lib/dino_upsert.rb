@@ -1,4 +1,4 @@
-require "dino_upsert/version"
+require "dino_utils/version"
 require 'active_record'
 
 module Dino
