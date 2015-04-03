@@ -37,3 +37,5 @@ module Dino
     end
   end
 end
+
+ActiveRecord::Base.send(:include, Dino::Upsert)
