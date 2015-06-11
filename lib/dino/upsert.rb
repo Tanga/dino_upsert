@@ -18,11 +18,18 @@ module Dino
     # If provided, the block gets the object before it's saved, in case
     #   there's special init options necessary for it.
     # rubocop:disable MethodLength
-    def self.upsert(klass, conditions, options = {}, &block)
+    def self.upsert(klass, data, options = {}, &block)
       retry_count = 0
+      data_copy = {}
+      data.each do |k, v|
+        if v.kind_of?(Hash)
+          v = klass.column_for_attribute(k).type_cast_for_database(v)
+        end
+        data_copy[k] = v
+      end
       begin
         klass.transaction(requires_new: true) do
-          klass.where(conditions).first_or_initialize(&block).tap { |t| t.update!(options) }
+          klass.where(data_copy).first_or_initialize(&block).tap { |t| t.update!(options) }
         end
       rescue PG::UniqueViolation, ActiveRecord::RecordNotUnique
         # If there's a unique violation, retry this. But only a certain amount
