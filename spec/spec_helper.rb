@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'dino_utils'
+require 'rspec-given'
 
 RSpec.configure do |c|
   c.before :suite do
