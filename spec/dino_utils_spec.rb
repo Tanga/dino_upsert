@@ -32,4 +32,8 @@ describe DinoUtils do
     expect(foos[2].h).to be == { 'x' => '2' }
     expect(Foo.count).to be == 3
   end
+
+  it 'can handle nil for conditions' do
+    Foo.upsert(nil, h: { x: '1' })
+  end
 end

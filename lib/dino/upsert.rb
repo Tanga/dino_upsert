@@ -21,6 +21,7 @@ module Dino
     def self.upsert(klass, data, options = {}, &block)
       retry_count = 0
       data_copy = {}
+      data ||= []
       data.each do |k, v|
         if v.kind_of?(Hash)
           v = klass.column_for_attribute(k).type_cast_for_database(v)
