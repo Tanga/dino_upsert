@@ -16,6 +16,7 @@ module TN
     def self.default_connection
       Faraday.new do |conn|
         conn.use TN::HTTP::WrapError
+        conn.use Faraday::Response::RaiseError
         yield conn if block_given?
         conn.adapter Faraday.default_adapter
       end

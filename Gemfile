@@ -6,4 +6,6 @@ gemspec
 group :development, :test do
   gem 'guard-rspec', require: false
   gem 'rspec-given'
+  gem 'vcr'
+  gem 'webmock'
 end
