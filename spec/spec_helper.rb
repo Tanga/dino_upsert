@@ -17,6 +17,8 @@ RSpec.configure do |c|
     drop table if exists foos;
     create table foos(id serial primary key, t text, h hstore, j json);
     SQL
+    class Foo < ActiveRecord::Base
+    end
   end
 
   c.before do

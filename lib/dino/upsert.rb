@@ -7,8 +7,8 @@ module Dino
     extend ActiveSupport::Concern
     # User.upsert
     module ClassMethods
-      def upsert(*args)
-        Dino::Upsert.upsert(self, *args)
+      def upsert(*args, &block)
+        Dino::Upsert.upsert(self, *args, &block)
       end
     end
 
@@ -30,7 +30,12 @@ module Dino
       end
       begin
         klass.transaction(requires_new: true) do
-          klass.where(data_copy).first_or_initialize(&block).tap { |t| t.update!(options) }
+          object = klass.where(data_copy).first_or_initialize
+          block.call(object) if block
+          object.tap do |t|
+            t.assign_attributes(options)
+            t.save! if t.changed?
+          end
         end
       rescue PG::UniqueViolation, ActiveRecord::RecordNotUnique
         # If there's a unique violation, retry this. But only a certain amount
