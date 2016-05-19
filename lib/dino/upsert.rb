@@ -23,9 +23,7 @@ module Dino
       data_copy = {}
       data ||= []
       data.each do |k, v|
-        if v.kind_of?(Hash)
-          v = klass.column_for_attribute(k).type_cast_for_database(v)
-        end
+        v = klass.column_for_attribute(k).type_cast_for_database(v) if v.is_a?(Hash)
         data_copy[k] = v
       end
       begin

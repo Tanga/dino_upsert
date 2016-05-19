@@ -9,7 +9,7 @@ module TN
       def call(env)
         @app.call(env)
       rescue Faraday::ClientError => e
-        raise ClientError.new(e)
+        raise ClientError, e
       end
     end
 
