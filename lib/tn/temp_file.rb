@@ -1,7 +1,6 @@
 module TN
   class TempFile
-
-    def initialize(content:nil, file:nil, name: 'tanga')
+    def initialize(content: nil, file: nil, name: 'tanga')
       extension = File.extname(name)
       file_name = SecureRandom.hex
       @file = file || ::Tempfile.new([file_name, extension])

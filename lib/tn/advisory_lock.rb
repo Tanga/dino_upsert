@@ -33,7 +33,7 @@ class TN::AdvisoryLock
     true
   end
 
-private
+  private
 
   def acquired?
     TN.execute_sql("select #{sql_function}(#{@key})") != "f"
