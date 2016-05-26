@@ -22,6 +22,13 @@ module TN
       end
     end
 
+    def self.form_connection
+      default_connection do |conn|
+        conn.request  :url_encoded
+        yield conn if block_given?
+      end
+    end
+
     def self.default_json_connection
       default_connection do |conn|
         conn.response :mashify
