@@ -5,6 +5,9 @@ module TN
   module HTTP
     ClientError = Class.new(Faraday::ClientError)
 
+    # TODO: remove this once this gets merged into Faraday
+    Faraday::Adapter::NetHttp::NET_HTTP_EXCEPTIONS << Zlib::BufError
+
     class WrapError < Faraday::Middleware
       def call(env)
         @app.call(env)

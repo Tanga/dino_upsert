@@ -15,4 +15,8 @@ describe TN::HTTP do
       conn.get('http://httpbin.org/status/200')
     end
   end
+
+  it 'should add Zlib::BufError to NET_HTTP_EXCEPTIONS' do
+    expect(Faraday::Adapter::NetHttp::NET_HTTP_EXCEPTIONS).to include(Zlib::BufError)
+  end
 end
