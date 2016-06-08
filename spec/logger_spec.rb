@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'tn/logger'
 
 describe TN do
   before do
