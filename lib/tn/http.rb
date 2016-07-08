@@ -7,6 +7,7 @@ module TN
 
     # TODO: remove this once this gets merged into Faraday
     Faraday::Adapter::NetHttp::NET_HTTP_EXCEPTIONS << Zlib::BufError
+    Faraday::Adapter::NetHttp::NET_HTTP_EXCEPTIONS << Errno::EPIPE
 
     class WrapError < Faraday::Middleware
       def call(env)
