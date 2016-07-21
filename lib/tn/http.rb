@@ -37,6 +37,7 @@ module TN
       default_connection(*arguments) do |conn|
         conn.response :mashify
         conn.response :json
+        conn.request :retry
         yield conn if block_given?
       end
     end
