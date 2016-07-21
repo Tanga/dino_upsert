@@ -19,4 +19,12 @@ describe TN::HTTP do
   it 'should add Zlib::BufError to NET_HTTP_EXCEPTIONS' do
     expect(Faraday::Adapter::NetHttp::NET_HTTP_EXCEPTIONS).to include(Zlib::BufError)
   end
+
+  it 'can use net http persistent' do
+    conn = described_class.default_connection('http://httpbin.org', adapter: :net_http_persistent)
+    VCR.use_cassette('persistent') do
+      2.times { conn.get('/status/200') }
+    end
+    expect(conn.builder.handlers.last.inspect).to be == "Faraday::Adapter::NetHttpPersistent"
+  end
 end

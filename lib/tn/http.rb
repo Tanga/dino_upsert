@@ -17,24 +17,24 @@ module TN
       end
     end
 
-    def self.default_connection(*arguments)
+    def self.default_connection(*arguments, adapter: nil)
       Faraday.new(*arguments) do |conn|
         conn.use TN::HTTP::WrapError
         conn.use Faraday::Response::RaiseError
         yield conn if block_given?
-        conn.adapter Faraday.default_adapter
+        conn.adapter(adapter || Faraday.default_adapter)
       end
     end
 
-    def self.form_connection(*arguments)
-      default_connection(*arguments) do |conn|
+    def self.form_connection(*arguments, adapter: nil)
+      default_connection(*arguments, adapter: adapter) do |conn|
         conn.request  :url_encoded
         yield conn if block_given?
       end
     end
 
-    def self.default_json_connection(*arguments)
-      default_connection(*arguments) do |conn|
+    def self.default_json_connection(*arguments, adapter: nil)
+      default_connection(*arguments, adapter: adapter) do |conn|
         conn.response :mashify
         conn.response :json
         yield conn if block_given?
