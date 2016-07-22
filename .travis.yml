@@ -1,4 +1,7 @@
+addons:
+  postgresql: "9.4"
 script:
+  - createdb dino_utils_test
   - bin/rake
 language: ruby
 cache: bundler
