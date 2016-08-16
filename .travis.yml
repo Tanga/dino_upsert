@@ -1,5 +1,8 @@
+addons:
+  postgresql: "9.4"
 script:
-  - bin/rspec
+  - createdb dino_utils_test
+  - bin/rake
 rvm:
   - 2.2.5
 language: ruby
