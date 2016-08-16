@@ -1,3 +1,6 @@
+script:
+  - bin/rspec
 language: ruby
-rvm:
-  - 2.2.0
+cache: bundler
+notifications:
+  slack: tanganetwork:zpPQzEDWf5HfZ77a2vpEGHXS
