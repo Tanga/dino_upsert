@@ -1,5 +1,7 @@
 script:
   - bin/rspec
+rvm:
+  - 2.2.5
 language: ruby
 cache: bundler
 notifications:
