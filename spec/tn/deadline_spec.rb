@@ -8,7 +8,7 @@ describe TN::Deadline do
     expect(t1).to be < seconds
     t2 = described_class.time_left
     expect(t2).to be < t1
-    sleep 0.5
+    sleep 0.05
     expect { described_class.time_left }.to raise_error(TN::Deadline::ExpiredError)
   end
 end
