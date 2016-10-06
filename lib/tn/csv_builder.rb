@@ -29,13 +29,14 @@ module TN::CSVBuilder
       csv
     end
 
-    def generate_csv_tempfile(flush_after_each_row: false)
+    def file(flush_after_each_row: false)
       file = TN::TempFile.new
       csv(file, flush_after_each_row: flush_after_each_row)
       file.close
       yield(file) if block_given?
       file
     end
+    alias generate_csv_tempfile file
 
     def csv_headers
       self.class.csv_headers
