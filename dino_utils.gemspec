@@ -25,6 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "faraday"
   spec.add_dependency "faraday_middleware"
   spec.add_dependency "faraday-conductivity"
-  spec.add_dependency "net-http-persistent"
+  spec.add_dependency "net-http-persistent", "~> 2"
   spec.add_dependency "pg"
 end
