@@ -6,23 +6,24 @@ module TN
     ClientError = Class.new(Faraday::ClientError)
 
     # TODO: remove this once this gets merged into Faraday
-    Faraday::Adapter::NetHttp::NET_HTTP_EXCEPTIONS << Zlib::BufError
-    Faraday::Adapter::NetHttp::NET_HTTP_EXCEPTIONS << Errno::EPIPE
+      # that never happened https://github.com/lostisland/faraday/pull/588
+      #array is frozen in newer versions of faraday
+    # Faraday::Adapter::NetHttp::NET_HTTP_EXCEPTIONS << Zlib::BufError
 
     class WrapError < Faraday::Middleware
       def call(env)
         @app.call(env)
-      rescue Faraday::ClientError => e
+      rescue Faraday::ServerError, Faraday::ClientError => e
         raise ClientError, e
       end
     end
 
-    def self.default_connection(*arguments, adapter: nil)
+    def self.default_connection(*arguments, adapter: Faraday.default_adapter)
       Faraday.new(*arguments) do |conn|
         conn.use TN::HTTP::WrapError
         conn.use Faraday::Response::RaiseError
         yield conn if block_given?
-        conn.adapter(adapter || Faraday.default_adapter)
+        conn.adapter(adapter)
       end
     end
 

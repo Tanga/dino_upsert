@@ -36,7 +36,7 @@ module TN::CSVBuilder
       yield(file) if block_given?
       file
     end
-    alias generate_csv_tempfile file
+    alias_method :generate_csv_tempfile, :file
 
     def csv_headers
       self.class.csv_headers
