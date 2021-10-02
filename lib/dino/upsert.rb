@@ -20,15 +20,15 @@ module Dino
     # rubocop:disable MethodLength
     def self.upsert(klass, data, options = {}, &block)
       retry_count = 0
-      data_copy = {}
-      data ||= []
-      data.each do |k, v|
-        v = klass.column_for_attribute(k).type_cast_for_database(v) if v.is_a?(Hash)
-        data_copy[k] = v
-      end
+      # data_copy = {}
+      # data ||= []
+      # data.each do |k, v|
+      #   v = klass.column_for_attribute(k).type_cast_for_database(v) if v.is_a?(Hash)
+      #   data_copy[k] = v
+      # end
       begin
         klass.transaction(requires_new: true) do
-          object = klass.where(data_copy).first_or_initialize
+          object = klass.where(data).first_or_initialize
           block.call(object) if block
           object.tap do |t|
             t.assign_attributes(options)
